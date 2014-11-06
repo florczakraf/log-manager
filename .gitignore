@@ -1,3 +1,9 @@
+#
+config.cfg
+*.log
+/to_parse
+#
+
 *.rbc
 capybara-*.html
 .rspec
