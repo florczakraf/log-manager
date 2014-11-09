@@ -1,0 +1,13 @@
+<h1>Players</h1>
+<hr />
+
+<div id="container">
+<ul>
+<% @players.each do |player| %>
+	<li>
+	<%= "[#{player.id}] #{player.guid} | Banned: #{player.banned}" %>
+	</li>
+<% end %>
+</ul>
+</div>
+

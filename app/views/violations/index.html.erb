@@ -1,0 +1,38 @@
+<h1>Violations</h1>
+<hr />
+	<%= form_tag("/violations/index", :metdod=>"get") do %>
+		<select id="type_name" name="type_name">
+			<%= options_for_select(@viol_types) %>
+		</select>
+		<%= submit_tag("Search", :class=>"btn") %>
+	<% end %>
+<hr />
+<div id="container">
+<%= will_paginate @violations, :params => { :type_name => @type_name } %>
+<table class="text-center table">
+<tr class="well text-uppercase" style="font-family: monospace">
+	<td>Date</td>
+	<td>GUID</td>
+	<td>Name</td>
+	<td>Type</td>
+	<td>Details</td>
+	<td>Server</td>
+</tr>
+
+<% @violations.each do |viol| %>
+	<% player = @players.find(viol.player_id) %>
+	<% server = @servers.find(viol.server_id) %>
+	<tr class>
+		<td><%= viol.date %></td>
+		<td><%= player.guid %> <%= link_to image_tag("ggc.jpg"), "http://www.ggc-stream.net/search/server/guid/gid/#{player.guid}", :target => "_blank" %></td>
+		<td><%= viol.name %></td>
+		<td><%= viol.type_name %></td>
+		<td><%= viol.details %></td>
+		<td><%= server.name %></td>
+		</tr>
+<% end %>
+
+</table>
+<%= will_paginate @violations, :params => { :type_name => @type_name } %>
+</div>
+

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 
+  type: 
+  player_id: 
+  details: 
+  ip: 
+  server_id: 1
+
+two:
+  date: 
+  type: 
+  player_id: 
+  details: 
+  ip: 
+  server_id: 1

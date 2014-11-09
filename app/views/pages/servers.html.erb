@@ -1,0 +1,11 @@
+<h1>Server list</h1>
+<hr />
+<div id="container">
+<ul>
+<% @servers.each do |srv| %>
+	<li>
+	<%= "#{srv.name} (#{srv.ip}:#{srv.port})" %>
+	</li>
+<% end %>
+</ul>
+</div>
