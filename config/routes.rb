@@ -1,20 +1,34 @@
 Rails.application.routes.draw do
+  get 'sessions/login'
+  get 'sessions/logout'
+  post 'sessions/login_attempt'
+
+  get 'sessions/profile'
+
   get 'pages/welcome'
   get 'pages/update'
   get 'pages/servers'
   
   get 'players/all'
-
+  match "players/all" => "players#all", :via => :post
   get 'players/filter'
-
   get 'players/ban'
-
   get 'players/id'
 
   get 'violations/index'
-
-  get 'violations/filter'
   match "violations/index" => "violations#index", :via => :post
+  get 'violations/filter'
+  
+  
+  get 'users/new'
+  post 'users/create'
+  
+  match "signup", :to => "users#new", :via => :post
+  #match "login", :to => "sessions#login"
+  
+#  match ':controller(/:action(/:id))(.:format)'
+   #':controller(/:action(/:id))(.:format)'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

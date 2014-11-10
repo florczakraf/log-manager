@@ -11,16 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141109212621) do
-
-  create_table "configurations", force: true do |t|
-    t.string   "ip"
-    t.string   "port"
-    t.string   "user"
-    t.string   "pass"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20141109224757) do
 
   create_table "players", force: true do |t|
     t.string   "guid"
@@ -35,6 +26,26 @@ ActiveRecord::Schema.define(version: 20141109212621) do
     t.string   "port"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "settings", force: true do |t|
+    t.string   "ip"
+    t.string   "port"
+    t.string   "user"
+    t.string   "pass"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "username"
+    t.string   "email"
+    t.string   "encrypted_password"
+    t.string   "salt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "activated"
+    t.boolean  "admin"
   end
 
   create_table "violations", force: true do |t|

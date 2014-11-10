@@ -1,0 +1,35 @@
+﻿<div class="Sign_Form">
+  <h1>Sign Up</h1>
+  <hr />
+  <% if flash[:error] %>
+    <div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert" >×</button>
+      <strong><%= flash[:error] %></strong>
+    </div>
+  <% end %>
+  
+  <% if flash[:success] %>
+    <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert" >×</button>
+      <strong><%= flash[:success] %></strong>
+    </div>
+  <% end %>
+  
+  <%= form_for(:user, :url => {:controller => 'users', :action => 'create'}) do |f| %>
+    <p> Username:</br> <%= f.text_field :username %> </p>
+    <p> Email:</br> <%= f.text_field :email %> </p>
+    <p> Password:</br> <%= f.password_field :password %></p>
+    <p> Password Confirmation:</br> <%= f.password_field :password_confirmation %> </p>
+    <%= f.submit "Sign up", class: "btn" %>
+  <% end %>
+  
+  <br>
+  <% if @user.errors.any? %>
+    <% for message_error in @user.errors.full_messages %>
+      <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" >×</button>
+        <strong><%= message_error %></strong>
+      </div>
+    <% end %>
+  <% end %>
+</div>

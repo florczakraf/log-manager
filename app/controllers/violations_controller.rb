@@ -1,4 +1,7 @@
 class ViolationsController < ApplicationController
+
+  before_filter :save_login_state, :only => [:index]
+
   def index
     show_per_page = 10
     
