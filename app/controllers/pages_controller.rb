@@ -2,8 +2,8 @@ require 'net/ftp'
 
 class PagesController < ApplicationController
   
-  before_filter :authenticate_user, :only => [:update, :servers]
-  before_filter :save_login_state, :only => [ :welcome]
+  before_filter :authenticate_user, :only => [:update]
+  before_filter :save_login_state, :only => [:servers, :welcome]
 
   def welcome
   end

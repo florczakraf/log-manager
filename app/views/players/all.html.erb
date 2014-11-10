@@ -13,6 +13,7 @@
 <tr class="well text-uppercase" style="font-family: monospace">
 	<td>ID</td>
 	<td>GUID</td>
+	<td>#violations</td>
 	
 	<td>Aliases</td>
 </tr>
@@ -22,7 +23,8 @@
 		<td><%= player.id %></td>
 		<td><%= player.guid %> <%= link_to image_tag("ggc.jpg"), "http://www.ggc-stream.net/search/server/guid/gid/#{player.guid}", :target => "_blank" %></td>
 		
-		<td>comming soon</td>
+		<td><%= player.violations.count %></td>
+		<td><%= player.violations.pluck(:name).uniq %></td>
 	</tr>
 <% end %>
 
