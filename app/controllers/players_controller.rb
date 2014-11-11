@@ -1,6 +1,4 @@
 class PlayersController < ApplicationController
-
-  #before_filter :authenticate_user, :only => [:update, :welcome]
   before_filter :save_login_state, :only => [:all]
 
   def all
@@ -16,12 +14,12 @@ class PlayersController < ApplicationController
     
   end
 
-  def filter
-  end
-
-  def ban
-  end
-
-  def id
+  def single
+    @id = params[:id]
+    
+    @player = Player.find(@id)
+    
+    @violations = Violation.where("player_id = '#{@id}'").order(date: :desc)
+    @servers = Server.all
   end
 end

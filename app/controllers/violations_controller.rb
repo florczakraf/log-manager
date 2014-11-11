@@ -1,7 +1,5 @@
 class ViolationsController < ApplicationController
 
-  before_filter :save_login_state, :only => [:index]
-
   def index
     show_per_page = 10
     
@@ -21,5 +19,12 @@ class ViolationsController < ApplicationController
         ["DUPNAME", "DUPNAME"], ["BADNAME", "BADNAME"], ["COMFAIL", "COMFAIL"]
       ]
     
+  end
+  
+  def single
+    @id = params[:id]
+    @violation = Violation.find(@id)
+    @server = Server.find(@violation.server_id)
+    @player = Player.find(@violation.player_id)
   end
 end

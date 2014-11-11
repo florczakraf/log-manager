@@ -3,7 +3,6 @@ require 'net/ftp'
 class PagesController < ApplicationController
   
   before_filter :authenticate_user, :only => [:update]
-  before_filter :save_login_state, :only => [:servers, :welcome]
 
   def welcome
   end
@@ -14,8 +13,8 @@ class PagesController < ApplicationController
   
   def update
     updater
+    Setting.first.update(:last_update => DateTime.now)
   end
-  
   
   def updater
     config = Setting.first

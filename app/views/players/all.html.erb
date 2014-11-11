@@ -15,16 +15,16 @@
 	<td>GUID</td>
 	<td>#violations</td>
 	
-	<td>Aliases</td>
+	<td>Alias</td>
 </tr>
 
 <% @players.each do |player| %>
 	<tr>
 		<td><%= player.id %></td>
-		<td><%= player.guid %> <%= link_to image_tag("ggc.jpg"), "http://www.ggc-stream.net/search/server/guid/gid/#{player.guid}", :target => "_blank" %></td>
+		<td><%= link_to player.guid, player_path(player) %> <%= link_to image_tag("ggc.jpg"), "http://www.ggc-stream.net/search/server/guid/gid/#{player.guid}", :target => "_blank" %></td>
 		
 		<td><%= player.violations.count %></td>
-		<td><%= player.violations.pluck(:name).uniq %></td>
+		<td><%= player.violations.pluck(:name).first %></td>
 	</tr>
 <% end %>
 

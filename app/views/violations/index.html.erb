@@ -17,6 +17,7 @@
 	<td>Type</td>
 	<td>Details</td>
 	<td>Server</td>
+	<td>Permlink</td>
 </tr>
 
 <% @violations.each do |viol| %>
@@ -24,12 +25,13 @@
 	<% server = @servers.find(viol.server_id) %>
 	<tr>
 		<td><%= viol.date %></td>
-		<td><%= player.guid %> <%= link_to image_tag("ggc.jpg"), "http://www.ggc-stream.net/search/server/guid/gid/#{player.guid}", :target => "_blank" %></td>
+		<td><%= link_to player.guid, player_path(player) %> <%= link_to image_tag("ggc.jpg"), "http://www.ggc-stream.net/search/server/guid/gid/#{player.guid}", :target => "_blank" %></td>
 		<td><%= viol.name %></td>
 		<td><%= viol.type_name %></td>
 		<td><%= viol.details %></td>
 		<td><%= server.name %></td>
-		</tr>
+		<td><%= link_to '[link]', violation_path(viol) , :target => "_blank" %></td>
+	</tr>
 <% end %>
 
 </table>

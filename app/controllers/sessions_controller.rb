@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
   before_filter :authenticate_user, :only => [:profile]
-  before_filter :save_login_state, :only => [:login, :login_attempt]
   
   def login
   end
@@ -25,5 +24,6 @@ class SessionsController < ApplicationController
   end
   
   def profile
+    
   end
 end

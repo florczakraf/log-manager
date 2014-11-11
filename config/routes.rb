@@ -11,17 +11,22 @@ Rails.application.routes.draw do
   
   get 'players/all'
   match "players/all" => "players#all", :via => :post
-  get 'players/filter'
-  get 'players/ban'
-  get 'players/id'
+  get 'players/single/:id', to: 'players#single', as: 'player'
 
+  
   get 'violations/index'
+  get 'violations/single/:id', to: 'violations#single', as: 'violation'
   match "violations/index" => "violations#index", :via => :post
-  get 'violations/filter'
   
   
   get 'users/new'
+  get 'users/manage', as: 'manage_users'
+  get 'users/activate/:id', to: 'users#activate', as: 'activate'
+  get 'users/removeeuser/:id', to: 'users#remove_user', as: 'remove_user'
+  get 'users/makeadmin/:id', to: 'users#make_admin', as: 'make_admin'
+  get 'users/remveadmin/:id', to: 'users#remove_admin', as: 'remove_admin'
   post 'users/create'
+  
   
   match "signup", :to => "users#new", :via => :post
   #match "login", :to => "sessions#login"

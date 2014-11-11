@@ -1,0 +1,43 @@
+﻿<h1>Manage users</h1>
+<hr />
+
+<div id="container">
+<%= will_paginate @users %>
+<table class="text-center table">
+<tr class="well text-uppercase" style="font-family: monospace">
+	<td>id</td>
+	<td>username</td>
+	<td>e-mail</td>
+	<td>activated</td>
+	<td>admin</td>
+	<td>actions</td>
+</tr>
+
+<% @users.each do |user| %>
+	<tr>
+		<td><%= user.id %></td>		
+		<td><%= user.username %></td>
+		<td><%= user.email %></td>
+		<td>
+			<% if user.activated %> 
+				+
+			<% else %>
+				<%= link_to '(Activate)', activate_path(user.id)%>
+			<% end %>
+		</td>
+		<td>
+			<% if user.admin %>
+				+
+				<%= link_to '(Remove)', remove_admin_path(user.id) %>
+			<% else %>
+				-
+				<%= link_to '(Make)', make_admin_path(user.id) %>
+			<% end %>
+		</td>
+		<td><%= link_to 'Delete User', remove_user_path(user.id) %></td>
+	</tr>
+<% end %>
+
+</table>
+<%= will_paginate @users %>
+</div>

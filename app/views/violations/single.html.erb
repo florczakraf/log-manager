@@ -1,0 +1,27 @@
+<h1>#<%= @id %></h1>
+<hr />
+
+<div id="container">
+
+<table class="text-center table">
+	<tr class="well text-uppercase" style="font-family: monospace">
+		<td>Date</td>
+		<td>GUID</td>
+		<td>Name</td>
+		<td>Type</td>
+		<td>Details</td>
+		<td>Server</td>
+	</tr>
+	<tr>
+		<td><%= @violation.date %></td>
+		<td><%= @player.guid %> <%= link_to image_tag("ggc.jpg"), "http://www.ggc-stream.net/search/server/guid/gid/#{@player.guid}", :target => "_blank" %></td>
+		<td><%= @violation.name %></td>
+		<td><%= @violation.type_name %></td>
+		<td><%= @violation.details %></td>
+		<td><%= @server.name %></td>
+	</tr>
+
+</table>
+
+</div>
+
