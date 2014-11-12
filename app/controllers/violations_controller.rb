@@ -16,7 +16,8 @@ class ViolationsController < ApplicationController
     
     @viol_types = [
         ["ALL", "ALL"], ["MD5TOOL", "MD5TOOL"], ["CVAR", "CVAR"], ["GAMEHACK", "GAMEHACK"], ["DUPGUID", "DUPGUID"],
-        ["DUPNAME", "DUPNAME"], ["BADNAME", "BADNAME"], ["COMFAIL", "COMFAIL"]
+        ["DUPNAME", "DUPNAME"], ["BADNAME", "BADNAME"], ["COMFAIL", "COMFAIL"], ["GAME INTEGRITY", "GAME INTEGRITY"], 
+        ["AUTO-UPDATE FAILURE", "AUTO-UPDATE FAILURE"], ["NAME SPAM", "NAME SPAM"]
       ]
     
   end

@@ -49,7 +49,7 @@ class PagesController < ApplicationController
 
   def parse_into_db(file, srv)
     
-    pattern = %r{\[(\d\d.\d\d.\d\d\d\d) (\d\d:\d\d:\d\d)\] VIOLATION \(([A-Z\d]+)\) #(\d+): (.+) \(slot \#\d+\) (.+) \[([a-f\d]+)\(.+\) ([\d\.]+)}
+    pattern = %r{\[(\d\d.\d\d.\d\d\d\d) (\d\d:\d\d:\d\d)\] VIOLATION \(([A-Z\d\ -]+)\) #(\d+): (.+) \(slot \#\d+\) (.+) \[([a-f\d]+)\(.+\) ([\d\.]+)}
     File.open(file).each  do |line|
       if line =~ pattern
         date = $1
