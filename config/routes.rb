@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'sessions/login'
-  get 'sessions/logout'
+  get 'sessions/login', as: 'login'
+  get 'sessions/logout', as: 'logout'
   post 'sessions/login_attempt'
 
   get 'sessions/profile'
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   match "violations/index" => "violations#index", :via => :post
   
   
-  get 'users/new'
+  get 'users/new', as: 'signup'
   get 'users/manage', as: 'manage_users'
   get 'users/activate/:id', to: 'users#activate', as: 'activate'
   get 'users/removeeuser/:id', to: 'users#remove_user', as: 'remove_user'

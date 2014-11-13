@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user, :is_admin, :only => [:manage, :make_admin, :remove_admin, :activate]
+  before_filter :authenticate_user, :is_admin, :only => [:manage, :make_admin, :remove_admin, :activate, :remove_user]
   @show_per_page = 10
   
   def new

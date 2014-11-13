@@ -34,7 +34,7 @@
 				<%= link_to '(Make)', make_admin_path(user.id) %>
 			<% end %>
 		</td>
-		<td><%= link_to 'Delete User', remove_user_path(user.id) %></td>
+		<td><%= link_to 'Delete User', remove_user_path(user.id), data: { :confirm => "Are you sure?" } %></td>
 	</tr>
 <% end %>
 

@@ -24,9 +24,9 @@
  <code class="navbar-text ">Last database update: <%= @last_update %></code>
  
  <% if @current_user %>
- <p style="padding-right: 10px" class="navbar-text navbar-right">Signed in as <%= @current_user.username %> <%= link_to "(Logout)", '/sessions/logout' %></p>
+ <p style="padding-right: 10px" class="navbar-text navbar-right">Signed in as <%= @current_user.username %> <%= link_to "(Logout)", logout_path %></p>
  <% else %>
- <p style="padding-right: 10px" class="navbar-text navbar-right"><%= link_to "Log in", '/sessions/login' %></p>
+ <p style="padding-right: 10px" class="navbar-text navbar-right"><%= link_to "Sign up", signup_path %> | <%= link_to "Log in", login_path %></p>
  <% end %>
  
 </div><!-- /.navbar-collapse -->
