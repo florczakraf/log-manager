@@ -9,6 +9,7 @@
 	<td>name</td>
 	<td>ip</td>
 	<td>port</td>
+	<td>Screenshot Viewer</td>
 </tr>
 
 <% @servers.each do |server| %>
@@ -17,6 +18,7 @@
 		<td><%= server.name %></td>
 		<td><%= server.ip %></td>
 		<td><%= server.port %></td>
+		<td><a href="ftp://109.169.20.171:8821/<%= server.ip %>_<%= server.port %>/pb/svss/msgpbssv.html">[LINK]</a></td>
 	</tr>
 <% end %>
 

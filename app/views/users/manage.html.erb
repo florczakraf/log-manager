@@ -28,10 +28,10 @@
 		<td>
 			<% if user.admin %>
 				+
-				<%= link_to '(Remove)', remove_admin_path(user.id) %>
+				<%= link_to '(Demote)', remove_admin_path(user.id) %>
 			<% else %>
 				-
-				<%= link_to '(Make)', make_admin_path(user.id) %>
+				<%= link_to '(Promote)', make_admin_path(user.id) %>
 			<% end %>
 		</td>
 		<td><%= link_to 'Delete User', remove_user_path(user.id), data: { :confirm => "Are you sure?" } %></td>
