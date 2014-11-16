@@ -1,5 +1,4 @@
 class PlayersController < ApplicationController
-  before_filter :save_login_state, :only => [:all]
 
   def all
     show_per_page = 10

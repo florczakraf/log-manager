@@ -1,6 +1,6 @@
 class ViolationsController < ApplicationController
 
-  def index
+  def all
     show_per_page = 10
     
     @type_name = params[:type_name]

@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'servers/all'
+  get 'servers/manage', as: 'manage_servers'
+  post 'servers/add', as: 'add_server'
+  get 'servers/removeserver/:id', to: 'servers#remove_server', as: 'remove_server'
+
   get 'sessions/login', as: 'login'
   get 'sessions/logout', as: 'logout'
   post 'sessions/login_attempt'
@@ -7,16 +12,15 @@ Rails.application.routes.draw do
 
   get 'pages/welcome'
   get 'pages/update'
-  get 'pages/servers'
   
   get 'players/all'
   match "players/all" => "players#all", :via => :post
   get 'players/single/:id', to: 'players#single', as: 'player'
 
   
-  get 'violations/index'
+  get 'violations/all'
   get 'violations/single/:id', to: 'violations#single', as: 'violation'
-  match "violations/index" => "violations#index", :via => :post
+  match "violations/all" => "violations#all", :via => :post
   
   
   get 'users/new', as: 'signup'

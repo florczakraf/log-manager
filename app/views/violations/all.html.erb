@@ -1,6 +1,6 @@
 <h1>Violations</h1>
 <hr />
-	<%= form_tag("/violations/index", :metdod=>"get") do %>
+	<%= form_tag("/violations/all", :metdod=>"get") do %>
 		<select id="type_name" name="type_name">
 			<%= options_for_select(@viol_types) %>
 		</select>

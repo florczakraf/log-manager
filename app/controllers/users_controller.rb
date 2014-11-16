@@ -17,7 +17,6 @@ class UsersController < ApplicationController
   end
   
   def manage
-    
     @users = User.all.paginate(page: params[:page], per_page: @show_per_page)
   end
   

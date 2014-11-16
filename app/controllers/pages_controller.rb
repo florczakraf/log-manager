@@ -7,10 +7,6 @@ class PagesController < ApplicationController
   def welcome
   end
   
-  def servers
-    @servers = Server.all
-  end
-  
   def update
     updater
     Setting.first.update(:last_update => DateTime.now)

@@ -15,9 +15,9 @@
 <div class="navbar-collapse navbar-inverse">
  <ul class="nav navbar-nav">
 	<%= nav_link 'Home', root_path %>
-	<%= nav_link 'Violations', '/violations/index' %>
+	<%= nav_link 'Violations', '/violations/all' %>
 	<%= nav_link 'Players', '/players/all' %>
-	<%= nav_link 'Servers', '/pages/servers' %>
+	<%= nav_link 'Servers', '/servers/all' %>
 	<%= nav_link 'Update database', '/pages/update' %>
  </ul>
  
@@ -50,7 +50,8 @@
 
 <br />
 <div class="modal-footer">
-<%= link_to "Manage users", :manage_users %>
+<%= link_to "Manage users", :manage_users %> |
+<%= link_to "Manage servers", :manage_servers %>
  | coded by andrzej <a href="mailto:andrzejcod4@gmail.com">[email]</a>
 </div>
 

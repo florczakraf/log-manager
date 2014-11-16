@@ -1,0 +1,36 @@
+<h1>Servers</h1>
+<hr />
+
+<div id="container">
+
+<table class="text-center table">
+<tr class="well text-uppercase" style="font-family: monospace">
+	<td>ID</td>
+	<td>name</td>
+	<td>ip</td>
+	<td>port</td>
+	<td>actions</td>
+</tr>
+
+<% @servers.each do |server| %>
+	<tr>
+		<td><%= server.id %></td>
+		<td><%= server.name %></td>
+		<td><%= server.ip %></td>
+		<td><%= server.port %></td>
+		<td><%= link_to 'Delete Server', remove_server_path(server.id), data: { :confirm => "Are you sure?" } %></td>
+	</tr>
+<% end %>
+</table>
+<hr />
+<h2>Add server</h2>
+
+  <%= form_for(:server, :url => {:controller => 'servers', :action => 'add'}) do |f| %>
+    <p> NAME:<br /> <%= f.text_field :name %> </p>
+    <p> IP:<br /> <%= f.text_field :ip %> </p>
+    <p> PORT:<br /> <%= f.text_field :port %></p>
+    <%= f.submit "Add", class: "btn" %>
+  <% end %>
+
+</div>
+
