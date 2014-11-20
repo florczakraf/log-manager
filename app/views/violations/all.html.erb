@@ -1,11 +1,67 @@
 <h1>Violations</h1>
 <hr />
-	<%= form_tag("/violations/all", :metdod=>"get") do %>
-		<select id="type_name" name="type_name">
-			<%= options_for_select(@viol_types) %>
-		</select>
-		<%= submit_tag("Search", :class=>"btn") %>
-	<% end %>
+
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#violation_types">
+  Filter Types <%= "(#{@violation_filter.size}/#{@viol_types.size})" %>
+</button>
+
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#servers">
+  Filter Servers <%= "(#{@server_filter.size}/#{@servers.size})" %>
+</button>
+
+<div id="violation_types" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			  <h4 class="modal-title" id="myModalLabel">Filter Violations</h4>
+			</div>
+			
+			<div class="modal-body">
+			
+			<%= form_tag("/violations/all", :metdod=>"get") do %>
+				<table class="table">
+				<% @viol_types.each do |type| %>
+					<tr>
+						<td><%= type %></td>
+						<td><input value="<%= type %>" id="<%= type %>" name="violation_filter[]" type="checkbox" <%= "checked='checked'" if @violation_filter.include?(type) %> /></td>
+					</tr>
+				<% end %>
+				</table>
+				<%= submit_tag("Filter", :class=>"btn") %>
+			<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="servers" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			  <h4 class="modal-title" id="myModalLabel">Filter Servers</h4>
+			</div>
+			
+			<div class="modal-body">
+			
+			<%= form_tag("/violations/all", :metdod=>"get") do %>
+				<table class="table">
+				<% @servers.each do |server| %>
+					<tr>
+						<td><%= server.name %></td>
+						<td><input value="<%= server.id %>" id="<%= server.id %>" name="server_filter[]" type="checkbox" <%= "checked=\"checked\"" if @server_filter.include?(server.id.to_s) %>" /></td>
+					</tr>
+				<% end %>
+				</table>
+				<%= submit_tag("Filter", :class=>"btn") %>
+			<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <hr />
 <div id="container">
 <%= will_paginate @violations, :params => { :type_name => @type_name } %>
