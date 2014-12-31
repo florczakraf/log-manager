@@ -1,24 +1,17 @@
 class PlayersController < ApplicationController
-
-  def all
-    show_per_page = 10
-    
-    @guid = params[:guid]
-    
-    if @guid.nil?
-      @players = Player.all.paginate(page: params[:page], per_page: show_per_page)
-    else
-      @players = Player.where("guid LIKE '%#{@guid}%'").paginate(page: params[:page], per_page: show_per_page)
-    end
-    
+  def index
+    @players = Player.all.paginate(page: params[:page], per_page: 10)
   end
-
-  def single
-    @id = params[:id]
-    
-    @player = Player.find(@id)
-    
-    @violations = Violation.where("player_id = '#{@id}'").order(date: :desc)
+  
+  def search
+    @guid = params[:guid]
+    @players = Player.where("guid LIKE '%#{@guid}%'").paginate(page: params[:page], per_page: 10)
+  end
+  
+  def show
+    id = params[:id]
+    @player = Player.find(id)
+    @violations = Violation.where("player_id = '#{id}'").order(date: :desc)
     @servers = Server.all
   end
 end

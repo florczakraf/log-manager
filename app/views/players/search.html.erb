@@ -1,0 +1,33 @@
+<h1>Players</h1>
+<hr />
+
+<%= form_tag("/players/search", :method=>"get") do %>
+	<%= text_field_tag "guid", @guid, placeholder: "GUID" %>
+	<%= submit_tag("Search", :class=>"btn") %>
+<% end %>
+<hr />
+
+<div id="container">
+	<%= will_paginate @players, :params => { :guid => @guid } %>
+	<table class="text-center table">
+		<tr class="well text-uppercase" style="font-family: monospace">
+			<td>ID</td>
+			<td>GUID</td>
+			<td>#violations</td>
+			<td>Alias</td>
+		</tr>
+
+		<% @players.each do |player| %>
+			<tr>
+				<td><%= player.id %></td>
+				<td><%= link_to player.guid, player_path(player) %> <%= ggc_link player.guid %></td>
+				
+				<td><%= player.violations.count %></td>
+				<td><%= player.violations.pluck(:name).first %></td>
+			</tr>
+		<% end %>
+
+	</table>
+	<%= will_paginate @players, :params => { :guid => @guid } %>
+</div>
+
