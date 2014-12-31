@@ -2,7 +2,7 @@ require 'net/ftp'
 
 module PagesHelper
 
-  def updater
+  def update_db
     config = Setting.first
     ip = config.ip
     port = config.port
