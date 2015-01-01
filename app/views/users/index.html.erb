@@ -22,19 +22,19 @@
 			<% if user.activated %> 
 				+
 			<% else %>
-				<%= link_to '(Activate)', activate_path(user.id)%>
+				<%= link_to '(Activate)', activate_user_path(user.id)%>
 			<% end %>
 		</td>
 		<td>
 			<% if user.admin %>
 				+
-				<%= link_to '(Demote)', remove_admin_path(user.id) %>
+				<%= link_to '(Demote)', demote_user_path(user.id) %>
 			<% else %>
 				-
-				<%= link_to '(Promote)', make_admin_path(user.id) %>
+				<%= link_to '(Promote)', promote_user_path(user.id) %>
 			<% end %>
 		</td>
-		<td><%= link_to 'Delete User', remove_user_path(user.id), data: { :confirm => "Are you sure?" } %></td>
+		<td><%= link_to 'Delete User', user_path(user.id), :method => :delete, data: { :confirm => "Are you sure?" } %></td>
 	</tr>
 <% end %>
 
