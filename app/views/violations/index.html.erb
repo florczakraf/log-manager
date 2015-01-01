@@ -2,11 +2,11 @@
 <hr />
 
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#violation_types">
-  Filter Types <%= "(#{@violation_filter.size}/#{@viol_types.size})" %>
+	Filter Types <%= "(#{@violation_filter.size}/#{@viol_types.size})" %>
 </button>
 
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#servers">
-  Filter Servers <%= "(#{@server_filter.size}/#{@servers.size})" %>
+	Filter Servers <%= "(#{@server_filter.size}/#{@servers.size})" %>
 </button>
 
 <div id="violation_types" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -19,7 +19,7 @@
 			
 			<div class="modal-body">
 			
-			<%= form_tag("/violations/all", :metdod=>"get") do %>
+			<%= form_tag(filter_violations_path, :method=>"get") do %>
 				<table class="table">
 				<% @viol_types.each do |type| %>
 					<tr>
@@ -45,7 +45,7 @@
 			
 			<div class="modal-body">
 			
-			<%= form_tag("/violations/all", :metdod=>"get") do %>
+			<%= form_tag(filter_violations_path, :method=>"get") do %>
 				<table class="table">
 				<% @servers.each do |server| %>
 					<tr>
@@ -64,33 +64,33 @@
 
 <hr />
 <div id="container">
-<%= will_paginate @violations, :params => { :type_name => @type_name } %>
-<table class="text-center table">
-<tr class="well text-uppercase" style="font-family: monospace">
-	<td>Date</td>
-	<td>GUID</td>
-	<td>Name</td>
-	<td>Type</td>
-	<td>Details</td>
-	<td>Server</td>
-	<td>Permlink</td>
-</tr>
+	<%= will_paginate @violations, :params => { :type_name => @type_name } %>
+	<table class="text-center table">
+		<tr class="well text-uppercase" style="font-family: monospace">
+			<td>Date</td>
+			<td>GUID</td>
+			<td>Name</td>
+			<td>Type</td>
+			<td>Details</td>
+			<td>Server</td>
+			<td>Permlink</td>
+		</tr>
 
-<% @violations.each do |viol| %>
-	<% player = @players.find(viol.player_id) %>
-	<% server = @servers.find(viol.server_id) %>
-	<tr>
-		<td><%= viol.date %></td>
-		<td><%= link_to player.guid, player_path(player) %> <%= link_to image_tag("ggc.jpg"), "http://www.ggc-stream.net/search/server/guid/gid/#{player.guid}", :target => "_blank" %></td>
-		<td><%= viol.name %></td>
-		<td><%= viol.type_name %></td>
-		<td><%= viol.details %></td>
-		<td><%= server.name %></td>
-		<td><%= link_to '[link]', violation_path(viol) , :target => "_blank" %></td>
-	</tr>
-<% end %>
+		<% @violations.each do |viol| %>
+			<% player = @players.find(viol.player_id) %>
+			<% server = @servers.find(viol.server_id) %>
+			<tr>
+				<td><%= viol.date %></td>
+				<td><%= link_to player.guid, player_path(player) %></td>
+				<td><%= viol.name %></td>
+				<td><%= viol.type_name %></td>
+				<td><%= viol.details %></td>
+				<td><%= server.name %></td>
+				<td><%= link_to '[link]', violation_path(viol) , :target => "_blank" %></td>
+			</tr>
+		<% end %>
 
-</table>
-<%= will_paginate @violations, :params => { :type_name => @type_name } %>
+	</table>
+	<%= will_paginate @violations, :params => { :type_name => @type_name } %>
 </div>
 
