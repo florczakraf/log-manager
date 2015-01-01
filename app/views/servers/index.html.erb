@@ -1,0 +1,28 @@
+<h1>Servers</h1>
+<hr />
+
+<div id="container">
+
+	<table class="text-center table">
+	<tr class="well text-uppercase" style="font-family: monospace">
+		<td>ID</td>
+		<td>name</td>
+		<td>ip</td>
+		<td>port</td>
+		<td>Screenshot Viewer</td>
+	</tr>
+
+	<% @servers.each do |server| %>
+		<tr>
+			<td><%= server.id %></td>
+			<td><%= server.name %></td>
+			<td><%= server.ip %></td>
+			<td><%= server.port %></td>
+			<td><%= screenshot_viewer_link server.ip, server.port %></td>
+		</tr>
+	<% end %>
+
+	</table>
+
+</div>
+

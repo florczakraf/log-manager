@@ -1,8 +1,8 @@
 class ServersController < ApplicationController
   
-  before_filter :authenticate_user, :is_admin, :only => [:manage, :add, :remove_server]
+  before_filter :authenticate_user, :is_admin, :only => [:manage, :create, :destroy]
   
-  def all
+  def index
     @servers = Server.all
   end
 
@@ -11,7 +11,7 @@ class ServersController < ApplicationController
     @server = Server.new
   end
   
-  def add
+  def create
     @server = Server.new(server_params)
     if @server.save
       flash[:notice] = "Server added!" 
@@ -22,17 +22,23 @@ class ServersController < ApplicationController
     render "manage"
   end
   
-  def remove_server
+  def destroy
     @servers = Server.all
     
     @id = params[:id]
     if @id
-      server = Server.find(@id)
-      server.delete
+      begin
+        server = Server.find(@id)
+        server.delete
+        flash[:notice] = "#{server.name} has been deleted!"
+      rescue
+        flash[:notice] = "Something went wrong."
+      end
     end
-    flash[:notice] = "#{server.name} has been deleted!"
-    render "manage" 
+    render "manage"
   end
+  
+  protected
   
   def server_params
     params.require(:server).permit(:id, :name, :ip, :port)
