@@ -1,11 +1,10 @@
 class SessionsController < ApplicationController
-  before_filter :authenticate_user, :only => [:profile]
-  
+
   def login
   end
 
   def login_attempt
-    authorized_user = User.authenticate(params[:username_or_email],params[:login_password])
+    authorized_user = User.authenticate(params[:username_or_email], params[:login_password])
     
     if authorized_user
       session[:user_id] = authorized_user.id
@@ -21,9 +20,5 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     flash[:success] = "You've been logged out successfully!"
     redirect_to :root
-  end
-  
-  def profile
-    
   end
 end
