@@ -15,6 +15,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer',  platforms: :ruby
 gem 'bcrypt', :require => 'bcrypt' 
 gem 'will_paginate', '~> 3.0'
+gem 'figaro'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

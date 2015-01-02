@@ -1,5 +1,6 @@
 class ViolationsController < ApplicationController
   include ViolationsHelper
+  
   def index
     @servers = Server.all
     @players = Player.all

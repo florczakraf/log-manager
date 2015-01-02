@@ -1,5 +1,5 @@
 module ServersHelper
   def screenshot_viewer_link ip, port
-    link_to '[LINK]', "ftp://109.169.20.171:8821/#{ip}_#{port}/pb/svss/msgpbssv.html"
+    link_to '[LINK]', "ftp://#{ENV['BASE_ADDRESS']}:#{ENV['FTP_PORT']}/#{ip}_#{port}/pb/svss/msgpbssv.html"
   end
 end
