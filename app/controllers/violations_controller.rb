@@ -1,14 +1,11 @@
 class ViolationsController < ApplicationController
   include ViolationsHelper
   def index
-    show_per_page = 10
     @servers = Server.all
     @players = Player.all
-    
-    set_filters
-    
     @viol_types = Violation.types
-    @violations = Violation.where(type_name: @violation_filter, server_id: @server_filter).order(date: :desc).paginate(page: params[:page], per_page: show_per_page)
+    set_filters
+    @violations = Violation.where(type_name: @violation_filter, server_id: @server_filter).order(date: :desc).paginate(page: params[:page], per_page: 10)
   end
   
   def filter
