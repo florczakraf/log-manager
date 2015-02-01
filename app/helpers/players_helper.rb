@@ -8,6 +8,6 @@ module PlayersHelper
   end
 
   def deathrun_echelon_link guid
-    link_to 'Knife Echelon', "http://echelon.ms-gaming.com/cod4/deathrun/clients.php?s=#{guid}&t=pbid", :target => "_blank"
+    link_to 'Deathrun Echelon', "http://echelon.ms-gaming.com/cod4/deathrun/clients.php?s=#{guid}&t=pbid", :target => "_blank"
   end
 end
