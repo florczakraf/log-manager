@@ -8,17 +8,15 @@ class SessionsController < ApplicationController
     
     if authorized_user
       session[:user_id] = authorized_user.id
-      flash[:success] = "Welcome #{authorized_user.username}!"
-      redirect_to (:root)
+      redirect_to return_path, success: "Welcome #{authorized_user.username}!"
     else
-      flash[:error] = "Invalid Username or Password"
+      flash.now[:error] = "Invalid Username or Password"
       render "login"	
     end
   end
   
   def logout
     session[:user_id] = nil
-    flash[:success] = "You've been logged out successfully!"
-    redirect_to :root
+    redirect_to :root, success: "You've been logged out successfully!"
   end
 end

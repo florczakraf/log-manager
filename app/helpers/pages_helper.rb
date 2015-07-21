@@ -29,9 +29,10 @@ module PagesHelper
         parse_into_db("tmp/#{srv.port}sv_cheat.log", srv.id)
       end
       connection.close
+      Setting.first.update!(last_update: DateTime.now)
+      redirect_to :root, notice: "Database updated successfully!"
     rescue
-      flash[:notice] = "There was an error during update."
-      redirect_to(:root)
+      redirect_to :root, alert: "There was an error during database update!"
     end
   end
 
@@ -47,16 +48,14 @@ module PagesHelper
         details = $6
         guid = $7
         ip = $8
-        
-        datetime = date + ' ' + time
-        
-        player = Player.find_by_guid(guid)
+        datetime = DateTime.strptime(date + ' ' + time, "%m.%d.%Y %H:%M:%S")        
+        player = Player.find_by(guid: guid)
         if player.nil?
-          player = Player.create(:guid => guid, :banned => false)
+          player = Player.create(guid: guid, banned: false)
         end
         
         begin
-          viol = Violation.create(:date => datetime, :type_name => type, :player_id => player.id, :details => details, :ip => ip, :server_id => srv, :name => name)
+          viol = Violation.create!(date: datetime, type_name: type, player_id: player.id, details: details, ip: ip, server_id: srv, name: name)
         rescue
           logger.info "Violation was not added to db."
         end

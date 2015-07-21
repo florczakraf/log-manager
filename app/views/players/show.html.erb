@@ -1,35 +1,33 @@
-<h1><%= @player.guid%></h1>
+<h1><%= colorize_guid(@player.guid) %></h1>
 <hr />
 Links:
 <ul>
-	<li><%= ggc_link @player.guid %></li>
-	<li><%= knife_echelon_link @player.guid %></li>
-	<li><%= deathrun_echelon_link @player.guid %></li>
+  <li><%= ggc_link @player.guid %></li>
+  <li><%= knife_echelon_link @player.guid %></li>
+  <li><%= deathrun_echelon_link @player.guid %></li>
 </ul>
 <hr />
 
 <h1>Violations</h1>
 <table class="text-center table">
-	<tr class="well text-uppercase" style="font-family: monospace">
-		<td>Date</td>
-		<td>Name</td>
-		<td>Type</td>
-		<td>Details</td>
-		<td>Server</td>
-		<td>Permlink</td>
-	</tr>
+  <tr class="well text-uppercase" style="font-family: monospace">
+    <td>Date</td>
+    <td>Name</td>
+    <td>Type</td>
+    <td>Details</td>
+    <td>Server</td>
+    <td>Permlink</td>
+  </tr>
 
-	<% @violations.each do |viol| %>
-		<% server = @servers.find(viol.server_id) %>
-		<tr>
-			<td><%= viol.date %></td>
-			<td><%= viol.name %></td>
-			<td><%= viol.type_name %></td>
-			<td><%= viol.details %></td>
-			<td><%= server.name %></td>
-			<td><%= link_to '[link]', violation_path(viol), :target => "_blank" %></td>
-		</tr>
-	<% end %>
-
+  <% @violations.each do |viol| %>
+    <% server = @servers.find(viol.server_id) %>
+    <tr>
+      <td><%= viol.date %></td>
+      <td><%= viol.name %></td>
+      <td><%= viol.type_name %></td>
+      <td><%= viol.details %></td>
+      <td><%= server.name %></td>
+      <td><%= link_to '[link]', violation_path(viol), :target => "_blank" %></td>
+    </tr>
+  <% end %>
 </table>
-

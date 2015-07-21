@@ -28,7 +28,7 @@
 					</tr>
 				<% end %>
 				</table>
-				<%= submit_tag("Filter", :class=>"btn") %>
+				<%= submit_tag("Filter", class: "btn") %>
 			<% end %>
 			</div>
 		</div>
@@ -50,7 +50,7 @@
 				<% @servers.each do |server| %>
 					<tr>
 						<td><%= server.name %></td>
-						<td><input value="<%= server.id %>" id="<%= server.id %>" name="server_filter[]" type="checkbox" <%= "checked=\"checked\"" if @server_filter.include?(server.id.to_s) %>" /></td>
+						<td><input value="<%= server.id %>" id="<%= server.id %>" name="server_filter[]" type="checkbox" <%= "checked='checked'" if @server_filter.include?(server.id.to_s) %>" /></td>
 					</tr>
 				<% end %>
 				</table>
@@ -64,7 +64,7 @@
 
 <hr />
 <div id="container">
-	<%= will_paginate @violations, :params => { :type_name => @type_name } %>
+	<%= will_paginate @violations, params: { type_name: @type_name } %>
 	<table class="text-center table">
 		<tr class="well text-uppercase" style="font-family: monospace">
 			<td>Date</td>
@@ -78,19 +78,19 @@
 
 		<% @violations.each do |viol| %>
 			<% player = @players.find(viol.player_id) %>
-			<% server = @servers.find(viol.server_id) %>
+			<% server = @servers.find_by(id: viol.server_id) %>
 			<tr>
 				<td><%= viol.date %></td>
-				<td><%= link_to player.guid, player_path(player) %></td>
+				<td><%= link_to colorize_guid(player.guid), player_path(player) %></td>
 				<td><%= viol.name %></td>
 				<td><%= viol.type_name %></td>
 				<td><%= viol.details %></td>
-				<td><%= server.name %></td>
-				<td><%= link_to '[link]', violation_path(viol) , :target => "_blank" %></td>
+				<td><%= server.try(:name) %></td>
+				<td><%= link_to '[link]', violation_path(viol) , target: '_blank' %></td>
 			</tr>
 		<% end %>
 
 	</table>
-	<%= will_paginate @violations, :params => { :type_name => @type_name } %>
+	<%= will_paginate @violations, params: { type_name: @type_name } %>
 </div>
 

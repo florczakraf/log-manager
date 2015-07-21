@@ -6,7 +6,6 @@ module ViolationsHelper
   def set_filters 
     @violation_filter = session[:violation_filter]
     if @violation_filter.nil? || @violation_filter.empty?
-      puts @viol_types
       session[:violation_filter] = @viol_types
       @violation_filter = @viol_types
     end
@@ -15,7 +14,7 @@ module ViolationsHelper
     if @server_filter.nil? || @server_filter.empty?
       @server_filter = []
       @servers.each { |srv| @server_filter.push(srv.id) }
-      session[:server] = @server_filter
+      session[:server_filter] = @server_filter
     end
   end
 end

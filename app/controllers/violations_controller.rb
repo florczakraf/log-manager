@@ -1,4 +1,6 @@
 class ViolationsController < ApplicationController
+  before_filter :authenticate_user, except: [:show]
+
   include ViolationsHelper
   
   def index
@@ -21,7 +23,7 @@ class ViolationsController < ApplicationController
       session[:server_filter] = server_filter
     end
     
-    redirect_to action: "index"
+    redirect_to violations_path
   end
   
   def show

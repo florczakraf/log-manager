@@ -7,6 +7,5 @@ class PagesController < ApplicationController
   
   def update
     update_db
-    Setting.first.update(:last_update => DateTime.now)
   end
 end

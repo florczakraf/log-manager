@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user, :is_admin, :only => [:index, :promote, :demote, :activate, :destroy]
+  before_filter :authenticate_user, :is_admin, only: [:index, :promote, :demote, :activate, :destroy]
   @show_per_page = 10
   
   def index
@@ -13,29 +13,26 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = "You signed up successfully!" 
+      redirect_to login_path, notice: "You signed up successfully!" 
     else
-      flash[:error] = "Form is invalid!"
+      render "new"
     end
-    render "new"
   end
   
   def promote
-    @users = User.all.paginate(page: params[:page], per_page: @show_per_page)
     @id = params[:id]
 
     begin
       user = User.find(@id)
-      user.update(:admin => true)
+      user.update(admin: true)
       flash[:notice] = "#{user.username} is now admin!"
     rescue
-      flash[:notice] = "Something went wrong."
+      flash[:alert] = "Something went wrong."
     end
-    render "index"
+    redirect_to users_path
   end
   
   def demote
-    @users = User.all.paginate(page: params[:page], per_page: @show_per_page)
     @id = params[:id]
     
     begin
@@ -43,13 +40,12 @@ class UsersController < ApplicationController
       user.update(:admin => false)
       flash[:notice] = "#{user.username} is no longer admin!"
     rescue
-      flash[:notice] = "Something went wrong."
+      flash[:alert] = "Something went wrong."
     end
-    render "index"
+    redirect_to users_path
   end
   
   def activate
-    @users = User.all.paginate(page: params[:page], per_page: @show_per_page)
     @id = params[:id]
     
     begin
@@ -57,13 +53,12 @@ class UsersController < ApplicationController
       user.update(:activated => true)
       flash[:notice] = "#{user.username} has been activated!"
     rescue
-      flash[:notice] = "Something went wrong."
+      flash[:alert] = "Something went wrong."
     end
-    render "index" 
+    redirect_to users_path
   end
   
   def destroy
-    @users = User.all.paginate(page: params[:page], per_page: @show_per_page)
     @id = params[:id]
     
     begin
@@ -71,9 +66,9 @@ class UsersController < ApplicationController
       user.delete
       flash[:notice] = "#{user.username} has been deleted!"
     rescue
-      flash[:notice] = "Something went wrong."
+      flash[:alert] = "Something went wrong."
     end
-    render "index" 
+    redirect_to users_path 
   end
   
   protected

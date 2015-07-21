@@ -4,12 +4,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception 
   before_filter :set_variables
   before_filter :save_login_state
+  add_flash_types :error, :success
   
   def set_variables
     @last_update = Setting.first.last_update
   end
   
-  protected
+  private
   
   def is_admin
     if @current_user
@@ -20,34 +21,37 @@ class ApplicationController < ActionController::Base
         redirect_to :root
       end
     else
-      redirect_to(:controller => 'sessions', :action => 'login')
+      redirect_to login_path, notice: "You have to log in to admin account."
       return false
     end
   end
   
   def authenticate_user
     if session[:user_id]
-      current_user = User.find session[:user_id]
-      
-      if current_user.activated
+      current_user = User.find(session[:user_id])
+      if current_user && current_user.activated
         @current_user = current_user
         return true
       else
-        flash[:error] = "Your account has not been activated yet."
-        redirect_to :root
+        redirect_to :root, alert: "Your account has not been activated"
       end
     else
-      redirect_to(:controller => 'sessions', :action => 'login')
+      session[:return_to] = request.path
+      redirect_to login_path, notice: "You have to log in!"
       return false
     end
   end
   
   def save_login_state
     if session[:user_id]
-      @current_user = User.find session[:user_id]
+      @current_user = User.find(session[:user_id])
       return false
     else
       return true
     end
+  end
+  
+  def return_path
+    session[:return_to] || root_path
   end
 end
