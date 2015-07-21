@@ -1,5 +1,3 @@
 == README
-=== Part of ruby-course-2014
-This is application created for administrators of http://ms-gaming.com which
-can help reviewing PunkBuster (http://evenbalance.com) violation log files.
+This is application created for administrators of http://ms-gaming.com. It can help with reviewing PunkBuster (http://evenbalance.com) violation log files.
 
